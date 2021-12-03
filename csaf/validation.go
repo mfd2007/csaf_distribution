@@ -2,7 +2,7 @@ package csaf
 
 import (
 	"context"
-	_ "embed"
+	_ "embed" // Used for embedding.
 	"encoding/json"
 	"log"
 	"net/url"
