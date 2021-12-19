@@ -21,10 +21,10 @@ func (p *processor) collectLinks(dir string, consume func(string)) error {
 
 	res, err := client.Get(dir)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	if res.Status != http.StatusOK {
+	if res.StatusCode != http.StatusOK {
 		return fmt.Errorf("status %d (%s)", res.StatusCode, res.Status)
 	}
 
@@ -36,10 +36,10 @@ func (p *processor) collectLinks(dir string, consume func(string)) error {
 	}
 
 	doc.Find("a").Each(func(i int, s *goquery.Selection) {
-		if link, ok := s.Attribute("href"); ok {
+		if link, ok := s.Attr("href"); ok {
 			consume(link)
 		}
 	})
 
-	return links, nil
+	return nil
 }
